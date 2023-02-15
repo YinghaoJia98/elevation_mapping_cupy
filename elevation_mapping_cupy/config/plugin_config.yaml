@@ -34,3 +34,12 @@ smooth_filter_1:
   layer_name: "smooth_1"
   extra_params:
     input_layer_name: "inpaint"
+step_filter:
+  type: "step_filter"
+  enable: True
+  fill_nan: False
+  is_height_layer: True
+  layer_name: "step"
+  extra_params:
+    cell_num: 1
+    input_layer_name: "elevation"

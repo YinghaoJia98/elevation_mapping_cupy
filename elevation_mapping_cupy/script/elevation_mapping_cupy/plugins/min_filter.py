@@ -108,5 +108,6 @@ class MinFilter(PluginBase):
             # If there's no more mask, break
             if (self.min_filtered_mask > 0.5).all():
                 break
-        min_filtered = cp.where(self.min_filtered_mask > 0.5, self.min_filtered.copy(), cp.nan)
+        min_filtered = cp.where(self.min_filtered_mask >
+                                0.5, self.min_filtered.copy(), cp.nan)
         return min_filtered

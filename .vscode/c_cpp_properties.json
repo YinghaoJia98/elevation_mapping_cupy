@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/december/pplanner_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/december/pplanner_ws/src/elevation_mapping_cupy/plane_segmentation/convex_plane_decomposition/include/**",
+        "/home/december/pplanner_ws/src/elevation_mapping_cupy/plane_segmentation/convex_plane_decomposition_ros/include/**",
+        "/home/december/pplanner_ws/src/elevation_mapping_cupy/elevation_mapping_cupy/include/**",
+        "/home/december/pplanner_ws/src/elevation_mapping_cupy/plane_segmentation/grid_map_filters_rsl/include/**",
+        "/home/december/pplanner_ws/src/pplanner/include/**",
+        "/home/december/pplanner_ws/src/pplanner_rviz_plugin/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
