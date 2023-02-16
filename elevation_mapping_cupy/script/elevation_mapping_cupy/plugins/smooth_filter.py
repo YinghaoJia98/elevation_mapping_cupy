@@ -43,7 +43,7 @@ class SmoothFilter(PluginBase):
             print("layer name {} was not found. Using elevation layer.".format(
                 self.input_layer_name))
             h = elevation_map[0]
-        print(elevation_map[0].shape)
+        # print(elevation_map[0].shape)
         # print(h[1])
         #    for j in i:
         #     print(j)

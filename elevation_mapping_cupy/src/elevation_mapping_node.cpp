@@ -21,7 +21,7 @@ int main(int argc, char **argv)
   py::gil_scoped_release release;
 
   // Spin
-  ros::AsyncSpinner spinner(5); // Use n threads
+  ros::AsyncSpinner spinner(10); // Use n threads
   spinner.start();
   ros::waitForShutdown();
   return 0;

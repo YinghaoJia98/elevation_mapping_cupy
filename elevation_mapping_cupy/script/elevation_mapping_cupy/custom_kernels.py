@@ -309,6 +309,7 @@ def error_counting_kernel(
             U rx = p[i * 3];
             U ry = p[i * 3 + 1];
             U rz = p[i * 3 + 2];
+            //printf("The valu of i is %f \\n",i);
             U x = transform_p(rx, ry, rz, R[0], R[1], R[2], t[0]);
             U y = transform_p(rx, ry, rz, R[3], R[4], R[5], t[1]);
             U z = transform_p(rx, ry, rz, R[6], R[7], R[8], t[2]);
@@ -675,7 +676,8 @@ if __name__ == "__main__":
         import time
 
         start = time.time()
-        polygon_mask(polygon, 0.0, 0.0, polygon_n, polygon_bbox, a, size=(100 * 100))
+        polygon_mask(polygon, 0.0, 0.0, polygon_n,
+                     polygon_bbox, a, size=(100 * 100))
         print(time.time() - start)
         import pylab as plt
 

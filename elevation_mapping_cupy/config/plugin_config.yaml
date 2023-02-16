@@ -41,5 +41,9 @@ step_filter:
   is_height_layer: True
   layer_name: "step"
   extra_params:
-    cell_num: 1
+    critical_cell_num: 4
+    critical_value: 0.2
+    first_window_radius: 0.04
+    second_window_radius: 0.04
+    map_resolution: 0.02
     input_layer_name: "elevation"
