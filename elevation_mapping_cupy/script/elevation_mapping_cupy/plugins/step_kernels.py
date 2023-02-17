@@ -117,7 +117,7 @@ def compute_hscore_kernel(
                 //double step=std::min(stepMax,step_middle);
                 if(step<critical_value)
                 {
-                    h_score=1-step/critical_value;
+                    h_score=1.0-step/critical_value;
                 }
                 else
                 {
