@@ -38,7 +38,7 @@ step_filter:
   type: "step_filter"
   enable: True
   fill_nan: False
-  is_height_layer: True
+  is_height_layer: False
   layer_name: "step"
   extra_params:
     critical_cell_num: 4
