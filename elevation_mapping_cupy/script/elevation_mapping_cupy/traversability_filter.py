@@ -12,26 +12,34 @@ def get_filter_torch(*args, **kwargs):
     class TraversabilityFilter(nn.Module):
         def __init__(self, w1, w2, w3, w_out, device="cuda", use_bias=False):
             super(TraversabilityFilter, self).__init__()
-            self.conv1 = nn.Conv2d(1, 4, 3, dilation=1, padding=0, bias=use_bias)
-            self.conv2 = nn.Conv2d(1, 4, 3, dilation=2, padding=0, bias=use_bias)
-            self.conv3 = nn.Conv2d(1, 4, 3, dilation=3, padding=0, bias=use_bias)
+            self.conv1 = nn.Conv2d(1, 4, 3, dilation=1,
+                                   padding=0, bias=use_bias)
+            self.conv2 = nn.Conv2d(1, 4, 3, dilation=2,
+                                   padding=0, bias=use_bias)
+            self.conv3 = nn.Conv2d(1, 4, 3, dilation=3,
+                                   padding=0, bias=use_bias)
             self.conv_out = nn.Conv2d(12, 1, 1, bias=use_bias)
 
             # Set weights.
             self.conv1.weight = nn.Parameter(torch.from_numpy(w1).float())
             self.conv2.weight = nn.Parameter(torch.from_numpy(w2).float())
             self.conv3.weight = nn.Parameter(torch.from_numpy(w3).float())
-            self.conv_out.weight = nn.Parameter(torch.from_numpy(w_out).float())
+            self.conv_out.weight = nn.Parameter(
+                torch.from_numpy(w_out).float())
 
         def __call__(self, elevation_cupy):
             # Convert cupy tensor to pytorch.
             elevation_cupy = elevation_cupy.astype(cp.float32)
-            elevation = torch.as_tensor(elevation_cupy, device=self.conv1.weight.device)
+            elevation = torch.as_tensor(
+                elevation_cupy, device=self.conv1.weight.device)
 
             with torch.no_grad():
-                out1 = self.conv1(elevation.view(-1, 1, elevation.shape[0], elevation.shape[1]))
-                out2 = self.conv2(elevation.view(-1, 1, elevation.shape[0], elevation.shape[1]))
-                out3 = self.conv3(elevation.view(-1, 1, elevation.shape[0], elevation.shape[1]))
+                out1 = self.conv1(
+                    elevation.view(-1, 1, elevation.shape[0], elevation.shape[1]))
+                out2 = self.conv2(
+                    elevation.view(-1, 1, elevation.shape[0], elevation.shape[1]))
+                out3 = self.conv3(
+                    elevation.view(-1, 1, elevation.shape[0], elevation.shape[1]))
 
                 out1 = out1[:, :, 2:-2, 2:-2]
                 out2 = out2[:, :, 1:-1, 1:-1]
@@ -58,10 +66,14 @@ def get_filter_chainer(*args, **kwargs):
     class TraversabilityFilter(chainer.Chain):
         def __init__(self, w1, w2, w3, w_out, use_cupy=True):
             super(TraversabilityFilter, self).__init__()
-            self.conv1 = L.Convolution2D(1, 4, ksize=3, pad=0, dilate=1, nobias=True, initialW=w1)
-            self.conv2 = L.Convolution2D(1, 4, ksize=3, pad=0, dilate=2, nobias=True, initialW=w2)
-            self.conv3 = L.Convolution2D(1, 4, ksize=3, pad=0, dilate=3, nobias=True, initialW=w3)
-            self.conv_out = L.Convolution2D(12, 1, ksize=1, nobias=True, initialW=w_out)
+            self.conv1 = L.Convolution2D(
+                1, 4, ksize=3, pad=0, dilate=1, nobias=True, initialW=w1)
+            self.conv2 = L.Convolution2D(
+                1, 4, ksize=3, pad=0, dilate=2, nobias=True, initialW=w2)
+            self.conv3 = L.Convolution2D(
+                1, 4, ksize=3, pad=0, dilate=3, nobias=True, initialW=w3)
+            self.conv_out = L.Convolution2D(
+                12, 1, ksize=1, nobias=True, initialW=w_out)
 
             if use_cupy:
                 self.conv1.to_gpu()
@@ -72,9 +84,12 @@ def get_filter_chainer(*args, **kwargs):
             chainer.config.enable_backprop = False
 
         def __call__(self, elevation):
-            out1 = self.conv1(elevation.reshape(-1, 1, elevation.shape[0], elevation.shape[1]))
-            out2 = self.conv2(elevation.reshape(-1, 1, elevation.shape[0], elevation.shape[1]))
-            out3 = self.conv3(elevation.reshape(-1, 1, elevation.shape[0], elevation.shape[1]))
+            out1 = self.conv1(
+                elevation.reshape(-1, 1, elevation.shape[0], elevation.shape[1]))
+            out2 = self.conv2(
+                elevation.reshape(-1, 1, elevation.shape[0], elevation.shape[1]))
+            out3 = self.conv3(
+                elevation.reshape(-1, 1, elevation.shape[0], elevation.shape[1]))
 
             out1 = out1[:, :, 2:-2, 2:-2]
             out2 = out2[:, :, 1:-1, 1:-1]
