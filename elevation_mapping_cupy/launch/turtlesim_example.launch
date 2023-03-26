@@ -2,6 +2,8 @@
 
 <launch>
 
+  <env name="PYTHONPATH" value="usr/lib/python3/dist-packages:$(env PYTHONPATH)" />
+
   <arg name="rviz_config"             default="$(find elevation_mapping_cupy)/rviz/turtle_example.rviz" />
 
   <!-- Start gazebo simulation. -->
