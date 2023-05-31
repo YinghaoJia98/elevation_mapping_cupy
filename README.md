@@ -105,6 +105,10 @@ Use parameter `use_chainer` to select which backend to use.
 - [pybind11_catkin](https://github.com/ipab-slmc/pybind11_catkin)
 - [grid_map](https://github.com/ANYbotics/grid_map)
 
+The updated pybind might be not suitable and we can choose the special type by compiling the source code.
+[pybind11_catkin](https://github.com/YinghaoJia98/pybind11_catkin.git) the test branch.
+[pybind11](https://github.com/YinghaoJia98/pybind11.git)
+
 ```bash
 sudo apt install ros-noetic-pybind11-catkin
 sudo apt install ros-noetic-grid-map-core ros-noetic-grid-map-msgs
