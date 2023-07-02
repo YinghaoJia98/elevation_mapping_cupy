@@ -59,6 +59,7 @@ class StepFilter(PluginBase):
                 self.input_layer_name))
             h = elevation_map[0]
         # ElementwiseKernel might be helpful, try it_20230215
+        h = cp.where(elevation_map[2] > 0.5, h, cp.nan)
         h_step = cp.empty((h.shape[0], h.shape[1]), dtype=float)
         h_score = cp.empty((h.shape[0], h.shape[1]), dtype=float)
         self.compute_hstep_kernel(h, h_step)

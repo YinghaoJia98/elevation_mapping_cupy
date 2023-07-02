@@ -27,6 +27,13 @@ def compute_hstep_kernel(
                     if (nr >= 0 && nr < h.shape()[0] && nc >= 0 && nc < h.shape()[1]) 
                     {
                         height=h[nr * h.shape()[1] + nc];
+                        if(height!=height)
+			            {
+			                //height=0;
+			                //printf("hello");
+			                continue;
+			            }
+                        
                         if(!init)
                         {
                             heightMax=height;
