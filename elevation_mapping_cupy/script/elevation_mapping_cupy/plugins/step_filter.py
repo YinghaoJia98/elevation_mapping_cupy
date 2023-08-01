@@ -13,12 +13,12 @@ from .plugin_manager import PluginBase
 
 class StepFilter(PluginBase):
 
-    def __init__(self, critical_cell_num: int = 4,
+    def __init__(self, cell_n: int = 100,
+                 critical_cell_num: int = 4,
                  critical_value: float = 0.30,
                  first_window_radius: float = 0.06,
                  second_window_radius: float = 0.06,
                  map_resolution: float = 0.03,
-                 cell_n: int = 100,
                  input_layer_name: str = "elevation", **kwargs):
         super().__init__()
         self.input_layer_name = input_layer_name
@@ -42,7 +42,8 @@ class StepFilter(PluginBase):
         )
 
     def __call__(self, elevation_map: cp.ndarray,
-                 layer_names: List[str], plugin_layers: cp.ndarray,
+                 layer_names: List[str],
+                 plugin_layers: cp.ndarray,
                  plugin_layer_names: List[str],
                  ) -> cp.ndarray:
         # print(layer_names)
