@@ -47,4 +47,26 @@ step_filter:
     second_window_radius: 0.06
     map_resolution: 0.03
     input_layer_name: "elevation"
-    
+cutter_filter:
+  type: "cutter_filter"
+  enable: True
+  fill_nan: False
+  is_height_layer: True
+  layer_name: "cutter"
+  extra_params:
+    first_num: 6
+    MaxGap: 0.30
+    CutterInputLayer: "elevation"
+step_cutter_filter:
+  type: "step_cutter_filter"
+  enable: True
+  fill_nan: False
+  is_height_layer: False
+  layer_name: "step_cutter"
+  extra_params:
+    critical_cell_num: 4
+    critical_value: 0.29
+    first_window_radius: 0.06
+    second_window_radius: 0.06
+    map_resolution: 0.03
+    StepCutterFilterInputLayer: "cutter"

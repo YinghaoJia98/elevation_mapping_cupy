@@ -75,6 +75,10 @@ def map_utils(
             else if (z - sz > dxy * ${ramped_height_range_a} + ${ramped_height_range_c} || z - sz > ${max_height_range}) {
                 return false;
             }
+            else if( z - sz < -1.5)
+            {
+                return false;
+            }
             else {
                 return true;
             }
