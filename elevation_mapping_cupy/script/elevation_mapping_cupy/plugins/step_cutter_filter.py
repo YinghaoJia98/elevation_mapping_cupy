@@ -19,7 +19,7 @@ class StepCutterFilter(PluginBase):
                  first_window_radius: float = 0.06,
                  second_window_radius: float = 0.06,
                  map_resolution: float = 0.03,
-                 StepCutterFilterInputLayer: str = "cutter", **kwargs):
+                 StepCutterFilterInputLayer: str = "cutter2", **kwargs):
         super().__init__()
         self.input_layer_name = StepCutterFilterInputLayer
         self.critical_cell_num = critical_cell_num

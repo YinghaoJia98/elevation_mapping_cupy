@@ -274,7 +274,6 @@ namespace elevation_mapping_cupy
       positionError = positionError_;
       orientationError = orientationError_;
     }
-
     map_.input(pointCloud, transformationSensorToMap.rotation(), transformationSensorToMap.translation(), positionError, orientationError);
 
     if (enableDriftCorrectedTFPublishing_)

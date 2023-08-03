@@ -11,14 +11,14 @@ from .cutter_kernels import cutter_min_kernel
 from .plugin_manager import PluginBase
 
 
-class CutterFilter(PluginBase):
+class CutterFilterSecond(PluginBase):
 
     def __init__(self, cell_n: int = 100,
                  first_num: int = 2,
                  MaxGap: float = 0.25,
-                 CutterInputLayer: str = "elevation", **kwargs):
+                 CutterInputLayer2: str = "cutter", **kwargs):
         super().__init__()
-        self.input_layer_name = CutterInputLayer
+        self.input_layer_name = CutterInputLayer2
         self.fisrt_num = first_num
         self.MaxGap = MaxGap
         self.compile_cutter_kernels()

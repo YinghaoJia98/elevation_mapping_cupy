@@ -69,4 +69,14 @@ step_cutter_filter:
     first_window_radius: 0.06
     second_window_radius: 0.06
     map_resolution: 0.03
-    StepCutterFilterInputLayer: "cutter"
+    StepCutterFilterInputLayer: "cutter2"
+cutter_filter_second:
+  type: "cutter_filter_second"
+  enable: True
+  fill_nan: False
+  is_height_layer: True
+  layer_name: "cutter2"
+  extra_params:
+    first_num: 6
+    MaxGap: 0.30
+    CutterInputLayer: "cutter"
