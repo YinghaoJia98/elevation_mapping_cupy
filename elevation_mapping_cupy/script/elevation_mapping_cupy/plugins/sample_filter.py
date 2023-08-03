@@ -8,7 +8,7 @@ from typing import List
 from .sample_kernels import normalize_kernel
 import cv2
 import numpy as np
-import time
+# import time
 
 
 
@@ -44,7 +44,7 @@ class SampleFilter(PluginBase):
                  ) -> cp.ndarray:
         # print(layer_names)
         # print(plugin_layer_names)
-        seconds_qian=time.time()
+        # seconds_qian=time.time()
 
         if self.SampleInputLayer1 in layer_names:
             idx = layer_names.index(self.SampleInputLayer1)
@@ -95,8 +95,8 @@ class SampleFilter(PluginBase):
         # h_probability2_cp=cp.asarray(h_probability2_np)
         # cum_prob_cp=cp.asarray(cum_prob)
         cum_prob_rowwise_hack_cp_=cp.asarray(cum_prob_rowwise_hack)
-        seconds_used=time.time()-seconds_qian
-        print(seconds_used)
+        # seconds_used=time.time()-seconds_qian
+        # print(seconds_used)
         # h_cuttered=h
         # print(h.shape)
         # print(h_step.shape)
