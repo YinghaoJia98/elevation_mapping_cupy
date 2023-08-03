@@ -52,9 +52,11 @@ class CutterFilter(PluginBase):
         # ElementwiseKernel might be helpful, try it_20230215
         h = cp.where(elevation_map[2] > 0.5, h, cp.nan)
         h_cuttered = cp.empty((h.shape[0], h.shape[1]), dtype=float)
+        h_cuttered2 = cp.empty((h.shape[0], h.shape[1]), dtype=float)
         self.compute_cutter_kernel(h, h_cuttered)
+        self.compute_cutter_kernel(h_cuttered, h_cuttered2)
         # h_cuttered=h
         # print(h.shape)
         # print(h_step.shape)
         # print(h_step)
-        return h_cuttered
+        return h_cuttered2

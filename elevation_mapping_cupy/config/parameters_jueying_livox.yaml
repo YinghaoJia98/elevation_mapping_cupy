@@ -74,7 +74,7 @@ pointcloud_topics: ['/livox_points'
 #   fps:                  # Publish rate. Use smaller value than `map_acquire_fps`.
 publishers:
   elevation_map_raw:
-    layers: ['elevation', 'traversability', 'variance','step','cutter','step_cutter','cutter2']
+    layers: ['elevation', 'traversability', 'variance','step','cutter','step_cutter']
     basic_layers: ['elevation', 'traversability']
     fps: 10.0
 #  elevation_map_recordable:
