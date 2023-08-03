@@ -80,3 +80,15 @@ cutter_filter_second:
     first_num: 6
     MaxGap: 0.30
     CutterInputLayer2: "cutter"
+sample_filter:
+  type: "sample_filter"
+  enable: True
+  fill_nan: False
+  is_height_layer: False
+  layer_name: "sample_probability"
+  extra_params:
+    blur_radiu_num: 79
+    sigma_num: 13
+    StepThreshold: 0.7
+    SampleInputLayer1: "elevation"
+    SampleInputLayer2: "step"

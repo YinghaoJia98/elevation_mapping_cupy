@@ -19,14 +19,14 @@ class CutterFilter(PluginBase):
                  CutterInputLayer: str = "elevation", **kwargs):
         super().__init__()
         self.input_layer_name = CutterInputLayer
-        self.fisrt_num = first_num
+        self.first_num = first_num
         self.MaxGap = MaxGap
         self.compile_cutter_kernels()
 
     def compile_cutter_kernels(self):
         self.compute_cutter_kernel = cutter_min_kernel(
             self.MaxGap,
-            self.fisrt_num
+            self.first_num
         )
 
 
