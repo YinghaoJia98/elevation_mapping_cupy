@@ -93,12 +93,12 @@ class SampleFilter(PluginBase):
         cum_prob_rowwise_hack = cum_prob.copy()
         cum_prob_rowwise_hack = np.tile(cum_prob_rowwise[:, np.newaxis], cum_prob_rowwise_hack.shape[1])
         # h_probability2_cp=cp.asarray(h_probability2_np)
-        cum_prob_cp=cp.asarray(cum_prob)
-        # cum_prob_rowwise_hack_cp_=cp.asarray(cum_prob_rowwise_hack)
+        # cum_prob_cp=cp.asarray(cum_prob)
+        cum_prob_rowwise_hack_cp_=cp.asarray(cum_prob_rowwise_hack)
         # seconds_used=time.time()-seconds_qian
         # print(seconds_used)
         # h_cuttered=h
         # print(h.shape)
         # print(h_step.shape)
         # print(h_step)
-        return cum_prob_cp
+        return cum_prob_rowwise_hack_cp_

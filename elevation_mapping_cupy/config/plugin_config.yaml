@@ -85,7 +85,19 @@ sample_filter:
   enable: True
   fill_nan: False
   is_height_layer: False
-  layer_name: "sample_probability"
+  layer_name: "cum_prob"
+  extra_params:
+    blur_radiu_num: 79
+    sigma_num: 13
+    StepThreshold: 0.7
+    SampleInputLayer1: "elevation"
+    SampleInputLayer2: "step"
+sample_filter2:
+  type: "sample_filter2"
+  enable: True
+  fill_nan: False
+  is_height_layer: False
+  layer_name: "cum_prob_rowwise_hack"
   extra_params:
     blur_radiu_num: 79
     sigma_num: 13
