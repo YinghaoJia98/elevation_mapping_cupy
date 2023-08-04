@@ -56,3 +56,31 @@ def merge_traversability_kernel(
         name="merge_traversability_kernel",
     )
     return merge_traversability_kernel
+
+def filtered_traversability_kernel(
+    StepMinimumValue
+):
+    filtered_traversability_kernel = cp.ElementwiseKernel(
+        in_params="raw T h, raw T h_probability, raw T step",
+        out_params="T h_filtered",
+        operation=string.Template(
+            """
+            double StepMinimumValue=${StepMinimumValue};
+            double height = h[i];
+            double probability = h_probability[i];
+            double step_score = step[i];
+            if( (height!=height) || (step_score<StepMinimumValue) || (step_score!=step_score) )
+            {
+                h_filtered=0;
+            }
+            else
+            {
+                h_filtered = probability;
+            }
+            """
+        ).substitute(
+            StepMinimumValue=StepMinimumValue,
+        ),
+        name="filtered_traversability_kernel",
+    )
+    return filtered_traversability_kernel
