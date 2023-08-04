@@ -6,6 +6,7 @@ import cupy as cp
 import string
 from typing import List
 from .sample_kernels import normalize_kernel
+from .sample_kernels import merge_traversability_kernel
 import cv2
 import numpy as np
 # import time
@@ -33,6 +34,8 @@ class SampleFilter(PluginBase):
 
     def compile_sample_kernels(self):
         self.compute_normalize_kernel = normalize_kernel(
+        )
+        self.merge_traversability_kernel=merge_traversability_kernel(
             self.StepThreshold
         )
 
@@ -77,10 +80,15 @@ class SampleFilter(PluginBase):
         h_probability_np=cv2.GaussianBlur(h_normalized_np,kernel_size,sigma)
         
         h_probability2_np=np.amax(h_probability_np)-h_probability_np
-        
-        prob_rowwise=np.sum(h_probability2_np, axis=1)
+
+        h_probability2_cp=cp.asarray(h_probability2_np)
+        h_merged = cp.empty((h.shape[0], h.shape[1]), dtype=float)
+        self.merge_traversability_kernel(h,h_probability2_cp,step,h_merged)
+        h_merged_np=cp.asnumpy(h_merged)
+
+        prob_rowwise=np.sum(h_merged_np, axis=1)
         prob_rowwise /= np.sum(prob_rowwise)
-        cum_prob=h_probability2_np.copy()
+        cum_prob=h_merged_np.copy()
         cum_prob /= np.sum(cum_prob, axis=1, keepdims=True)
 
         cum_prob_rowwise = prob_rowwise.copy()
