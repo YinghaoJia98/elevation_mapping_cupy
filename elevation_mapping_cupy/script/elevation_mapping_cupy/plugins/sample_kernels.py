@@ -18,6 +18,7 @@ def normalize_kernel(
             if((height!=height) || (step_score!=step_score) || (step_score<StepMinimumValue))
             {
             h_normalize=0;
+            // h_normalize = nanf("");
             }
             else
             {
