@@ -40,8 +40,8 @@ max_unsafe_n: 10                                # if the number of cells under s
 overlap_clear_range_xy: 4.0                     # xy range [m] for clearing overlapped area. this defines the valid area for overlap clearance. (used for multi floor setting)
 overlap_clear_range_z: 3.0                      # z range [m] for clearing overlapped area. cells outside this range will be cleared. (used for multi floor setting)
 
-map_frame: 'world'                               # The map frame where the odometry source uses.
-base_frame: 'base_link'                              # The robot's base frame. This frame will be a center of the map.'base_link'
+map_frame: 'world' #world map                              # The map frame where the odometry source uses.
+base_frame: 'base_link'    #base_link livox                          # The robot's base frame. This frame will be a center of the map.'base_link'
 corrected_map_frame: 'corrected_odom'
 
 #### Feature toggles ########
@@ -67,7 +67,7 @@ plugin_config_file: '$(rospack find elevation_mapping_cupy)/config/plugin_config
 pointcloud_topics: ['/velodyne_points',
                     '/lidar_front_points'
                     ]
-
+#'/velodyne_points','/lidar_front_points'
 #### Publishers ########
 # topic_name:
 #   layers:               # Choose from 'elevation', 'variance', 'traversability', 'time', 'normal_x', 'normal_y', 'normal_z', 'color', plugin_layer_names
@@ -75,7 +75,7 @@ pointcloud_topics: ['/velodyne_points',
 #   fps:                  # Publish rate. Use smaller value than `map_acquire_fps`.
 publishers:
   elevation_map_raw:
-    layers: ['elevation', 'traversability', 'variance','step','cutter','step_cutter','cum_prob','cum_prob_rowwise_hack', 'normal_x', 'normal_y', 'normal_z']
+    layers: ['elevation', 'traversability', 'variance','step','cutter','step_cutter','cum_prob','cum_prob_rowwise_hack', 'normal_x', 'normal_y', 'normal_z','frontiers']
     basic_layers: ['elevation', 'traversability']
     fps: 10.0
 #  elevation_map_recordable:

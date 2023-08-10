@@ -104,3 +104,13 @@ sample_filter2:
     StepThreshold: 0.7
     SampleInputLayer1: "elevation"
     SampleInputLayer2: "step"
+frontier_filter:
+  type: "frontier_filter"
+  enable: True
+  fill_nan: False
+  is_height_layer: False
+  layer_name: "frontiers"
+  extra_params:
+    TraThreshold: 0.7
+    FrontierInputLayer1: "elevation"
+    FrontierInputLayer2: "step_cutter"
