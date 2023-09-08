@@ -20,7 +20,7 @@ def frontier_kernel(
             }
             else
             {
-                if( (row == (h.shape()[0] - 1)) || (col == (h.shape()[1] - 1)) || (row == 0) || (col == 0) )
+                if( (row == (h.shape()[0] - 2)) || (col == (h.shape()[1] - 2)) || (row == 1) || (col == 1) )
                 {
                     //printf("hello/n");
                     h_frontier = 1;

@@ -65,7 +65,8 @@ plugin_config_file: '$(rospack find elevation_mapping_cupy)/config/plugin_config
 
 #### Subscribers ########
 pointcloud_topics: ['/velodyne_points',
-                    '/lidar_front_points'
+                    '/lidar_front_points',
+                    '/lidar_back_points'
                     ]
 #'/velodyne_points','/lidar_front_points'
 #### Publishers ########

@@ -67,6 +67,7 @@ class SampleFilter(PluginBase):
         step = cp.where(elevation_map[2] > 0.5, step, cp.nan)
         h_frontier = cp.empty((h.shape[0], h.shape[1]), dtype=float)
         self.compute_frontier_kernel(h,step,h_frontier)
+        #print(h_frontier)
 
         # cum_prob_rowwise_hack_cp_=cp.asarray(cum_prob_rowwise_hack)
         # seconds_used=time.time()-seconds_qian
