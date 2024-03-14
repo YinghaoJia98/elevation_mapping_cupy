@@ -1,5 +1,5 @@
 #### Basic parameters ########
-resolution: 0.08                                # resolution in m.
+resolution: 0.06                                # resolution in m.
 map_length: 6                                  # map's size in m.
 sensor_noise_factor: 0.05                       # point's noise is sensor_noise_factor*z^2 (z is distance from sensor).
 mahalanobis_thresh: 2.0                         # points outside this distance is outlier.
@@ -64,11 +64,13 @@ use_only_above_for_upper_bound: false
 plugin_config_file: '$(rospack find elevation_mapping_cupy)/config/plugin_config.yaml'
 
 #### Subscribers ########
-pointcloud_topics: ['/velodyne_points',
-                    '/lidar_front_points',
-                    '/lidar_back_points'
+pointcloud_topics: ['/cam1/point_cloud_face',
+                    '/cam3/point_cloud_left',
+                    '/cam4/point_cloud_right',
+                    '/cam5/point_cloud_rearDown'
                     ]
 #'/velodyne_points','/lidar_front_points'
+#'/velodyne_points','/lidar_front_points', '/lidar_back_points'
 #### Publishers ########
 # topic_name:
 #   layers:               # Choose from 'elevation', 'variance', 'traversability', 'time', 'normal_x', 'normal_y', 'normal_z', 'color', plugin_layer_names
