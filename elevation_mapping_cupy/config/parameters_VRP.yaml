@@ -76,7 +76,7 @@ pointcloud_topics: ['/velodyne_points',
 #   fps:                  # Publish rate. Use smaller value than `map_acquire_fps`.
 publishers:
   elevation_map_raw:
-    layers: ['elevation', 'traversability', 'variance','step','cutter','step_cutter','cum_prob','cum_prob_rowwise_hack', 'normal_x', 'normal_y', 'normal_z','frontiers']
+    layers: ['elevation', 'traversability', 'variance','step','cutter','step_cutter','sample_probability','cum_prob','cum_prob_rowwise_hack', 'normal_x', 'normal_y', 'normal_z','frontiers']
     basic_layers: ['elevation', 'traversability']
     fps: 10.0
 #  elevation_map_recordable:

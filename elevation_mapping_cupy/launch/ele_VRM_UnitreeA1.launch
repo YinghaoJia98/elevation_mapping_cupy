@@ -1,0 +1,7 @@
+<launch>
+<!--node pkg="tf" type="static_transform_publisher" name="tf_world" args="0 0 0 0 0 0 map world 100" /-->
+  <!-- Elevation mapping node -->
+  <node pkg="elevation_mapping_cupy" type="elevation_mapping_node" name="elevation_mapping" output="screen">
+    <rosparam command="load" file="$(find elevation_mapping_cupy)/config/parameters_VRM_UnitreeA1.yaml" />
+  </node>
+</launch>
