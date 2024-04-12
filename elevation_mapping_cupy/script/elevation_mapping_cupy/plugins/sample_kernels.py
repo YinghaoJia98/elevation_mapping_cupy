@@ -3,6 +3,7 @@ import string
 
 
 def normalize_kernel(
+    StepMinimumValue
 ):
     normalize_kernel = cp.ElementwiseKernel(
         in_params="raw T h, raw T step",
@@ -13,7 +14,8 @@ def normalize_kernel(
             int col = i % h.shape()[1];  // column index of current element
             double height = h[i];
             double step_score = step[i];
-            if((height!=height) || (step_score!=step_score))
+            double StepMinimumValue=${StepMinimumValue};
+            if((height!=height) || (step_score<StepMinimumValue) || (step_score!=step_score))
             {
                 h_normalize=0;
             // h_normalize = nanf("");
@@ -24,6 +26,7 @@ def normalize_kernel(
             }
             """
         ).substitute(
+            StepMinimumValue=StepMinimumValue,
         ),
         name="normalize_kernel",
     )

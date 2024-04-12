@@ -19,22 +19,22 @@ from .plugin_manager import PluginBase
 
 class SampleFilter(PluginBase):
 
-    def __init__(self, cell_n: int = 100,
-                 blur_radiu_num: int = 79,
-                 sigma_num: int = 13,
+    def __init__(self, 
                  StepThreshold: float = 0.7,
                  SampleInputLayer1: str = "elevation",
-                 SampleInputLayer2: str = "step", **kwargs):
+                 SampleInputLayer2: str = "step",
+                 SampleInputLayer3: str = "sample_probability",
+                 **kwargs):
         super().__init__()
         self.SampleInputLayer1 = SampleInputLayer1
         self.SampleInputLayer2 = SampleInputLayer2
-        self.blur_radiu_num = blur_radiu_num
-        self.sigma_num = sigma_num
+        self.SampleInputLayer3 = SampleInputLayer3
         self.StepThreshold = StepThreshold
         self.compile_sample_kernels()
 
     def compile_sample_kernels(self):
         self.compute_normalize_kernel = normalize_kernel(
+            self.StepThreshold
         )
         self.Comput_merge_kernel=merge_traversability_kernel(
             self.StepThreshold
@@ -74,23 +74,23 @@ class SampleFilter(PluginBase):
             print("[sample2_info] layer name {} was not found. Using elevation layer.".format(
                 self.SampleInputLayer2))
             step = elevation_map[0]
-        # ElementwiseKernel might be helpful, try it_20230215
-        h = cp.where(elevation_map[2] > 0.5, h, cp.nan)
-        h_normalized = cp.empty((h.shape[0], h.shape[1]), dtype=float)
-        self.compute_normalize_kernel(h,step,h_normalized)
-        h_normalized_np = cp.asnumpy(h_normalized)
-        kernel_size = (self.blur_radiu_num, self.blur_radiu_num)
-        sigma = self.sigma_num
-        h_probability_np=cv2.GaussianBlur(h_normalized_np,kernel_size,sigma)
+
+        if self.SampleInputLayer3 in layer_names:
+            idx = layer_names.index(self.SampleInputLayer3)
+            sample_probability = elevation_map[idx]
+        elif self.SampleInputLayer3 in plugin_layer_names:
+            idx = plugin_layer_names.index(self.SampleInputLayer3)
+            sample_probability = plugin_layers[idx]
+        else:
+            print("[sample3_info] layer name {} was not found. Using elevation layer.".format(
+                self.SampleInputLayer3))
+            sample_probability = elevation_map[0]
         
-        h_probability2_np=np.amax(h_probability_np)-h_probability_np
+        h_merged_cp=cp.empty((h.shape[0], h.shape[1]), dtype=float)
+        self.Comput_merge_kernel(h,sample_probability,step,h_merged_cp)
 
-        h_probability2_cp=cp.asarray(h_probability2_np)
-        h_merged = cp.empty((h.shape[0], h.shape[1]), dtype=float)
-        self.Comput_merge_kernel(h,h_probability2_cp,step,h_merged)
-        h_merged_np=cp.asnumpy(h_merged)
-
-        prob_rowwise=np.sum(h_merged_np, axis=1)
+        h_merged_np=cp.asnumpy(h_merged_cp)
+        prob_rowwise=np.sum(h_merged_np, axis=1, keepdims=True)
         prob_rowwise /= np.sum(prob_rowwise)
         cum_prob=h_merged_np.copy()
         cum_prob /= np.sum(cum_prob, axis=1, keepdims=True)
@@ -108,7 +108,7 @@ class SampleFilter(PluginBase):
         cum_prob_cp=cp.asarray(cum_prob)
 
         h_filtered = cp.empty((h.shape[0], h.shape[1]), dtype=float)
-        self.Comput_merge_kernel(h,cum_prob_cp,step,h_filtered)
+        self.Comput_Filtered_Kernel(h,cum_prob_cp,step,h_filtered)
         # cum_prob_rowwise_hack_cp_=cp.asarray(cum_prob_rowwise_hack)
         # seconds_used=time.time()-seconds_qian
         # print(seconds_used)
