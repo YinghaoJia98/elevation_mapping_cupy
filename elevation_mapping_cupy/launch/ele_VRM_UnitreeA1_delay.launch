@@ -1,0 +1,8 @@
+<launch>
+<!--node pkg="tf" type="static_transform_publisher" name="tf_world" args="0 0 0 0 0 0 map world 100" /-->
+  <!-- Elevation mapping node -->
+  <arg name="node_start_delay" default="1.0" />  
+  <node pkg="elevation_mapping_cupy" type="elevation_mapping_node" name="elevation_mapping" output="screen" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
+    <rosparam command="load" file="$(find elevation_mapping_cupy)/config/parameters_VRM_UnitreeA1.yaml" />
+  </node>
+</launch>
