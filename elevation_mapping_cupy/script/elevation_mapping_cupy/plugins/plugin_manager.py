@@ -73,6 +73,9 @@ class PluginManger(object):
                     # Add cell_n to params
                     extra_param["cell_n"] = self.cell_n
                     self.plugins.append(obj(**extra_param))
+                    # print("param is ", param)
+                    # print("extra param is ",extra_param)
+
 
         self.layers = cp.zeros((len(self.plugins), self.cell_n, self.cell_n))
         self.layer_names = self.get_layer_names()
@@ -93,8 +96,10 @@ class PluginManger(object):
                         is_height_layer=v["is_height_layer"],
                     )
                 )
-            extra_params.append(v["extra_params"])
+                extra_params.append(v["extra_params"])
         self.init(plugin_params, extra_params)
+        # print("plugin params: ",plugin_params)
+        # print("extra params: ",extra_params)
         print("Loaded plugins are ", *self.plugin_names)
 
     def get_layer_names(self):

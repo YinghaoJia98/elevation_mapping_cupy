@@ -42,7 +42,7 @@ step_filter:
   layer_name: "step"
   extra_params:
     critical_cell_num: 4
-    critical_value: 0.29
+    critical_value: 0.30
     first_window_radius: 0.06
     second_window_radius: 0.06
     map_resolution: 0.03
@@ -54,8 +54,8 @@ cutter_filter:
   is_height_layer: True
   layer_name: "cutter"
   extra_params:
-    first_num: 6
-    MaxGap: 0.30
+    first_num: 2
+    MaxGap: 0.25
     CutterInputLayer: "elevation"
 step_cutter_filter:
   type: "step_cutter_filter"
@@ -65,7 +65,7 @@ step_cutter_filter:
   layer_name: "step_cutter"
   extra_params:
     critical_cell_num: 4
-    critical_value: 0.29
+    critical_value: 0.30
     first_window_radius: 0.06
     second_window_radius: 0.06
     map_resolution: 0.03
@@ -88,7 +88,7 @@ probability_filter:
   layer_name: "sample_probability"
   extra_params:
     blur_radiu_num: 51
-    sigma_num: 13
+    sigma_num: 25
     StepThreshold: 0.7
     SampleInputLayer1: "elevation"
     SampleInputLayer2: "step"

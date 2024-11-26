@@ -41,7 +41,7 @@ overlap_clear_range_xy: 4.0                     # xy range [m] for clearing over
 overlap_clear_range_z: 3.0                      # z range [m] for clearing overlapped area. cells outside this range will be cleared. (used for multi floor setting)
 
 map_frame: 'world' #world map                              # The map frame where the odometry source uses.
-base_frame: 'base_link'    #base_link livox                          # The robot's base frame. This frame will be a center of the map.'base_link'
+base_frame: 'SmbA_base_link'    #base_link livox                          # The robot's base frame. This frame will be a center of the map.'base_link'
 corrected_map_frame: 'corrected_odom'
 
 #### Feature toggles ########
@@ -64,9 +64,8 @@ use_only_above_for_upper_bound: false
 plugin_config_file: '$(rospack find elevation_mapping_cupy)/config/plugin_config.yaml'
 
 #### Subscribers ########
-pointcloud_topics: ['/velodyne_points',
-                    '/lidar_front_points',
-                    '/lidar_back_points'
+pointcloud_topics: ['/SmbA/SmbA_Sensor_Head_Top_Velodyne_Points',
+                    /SmbA_Sensor_Head_Front_RealsenseD435/depth/color/points
                     ]
 #'/velodyne_points','/lidar_front_points'
 #### Publishers ########

@@ -23,6 +23,8 @@ class StepCutterFilter(PluginBase):
         super().__init__()
         self.input_layer_name = StepCutterFilterInputLayer
         self.critical_cell_num = critical_cell_num
+        # print("initial critical_cell_num is ",self.critical_cell_num)
+        # print("cell_n is ",cell_n)
         self.critical_value = critical_value
         self.first_window_radius = first_window_radius
         self.second_window_radius = second_window_radius
@@ -49,6 +51,7 @@ class StepCutterFilter(PluginBase):
         # print(layer_names)
         # print(plugin_layer_names)
         # seconds_qian=time.time()
+        # print("Using, critical_cell_num is ",self.critical_cell_num)
         if self.input_layer_name in layer_names:
             idx = layer_names.index(self.input_layer_name)
             h = elevation_map[idx]
