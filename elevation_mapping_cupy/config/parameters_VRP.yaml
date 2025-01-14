@@ -65,7 +65,8 @@ plugin_config_file: '$(rospack find elevation_mapping_cupy)/config/plugin_config
 
 #### Subscribers ########
 pointcloud_topics: ['/SmbA/SmbA_Sensor_Head_Top_Velodyne_Points',
-                    /SmbA_Sensor_Head_Front_RealsenseD435/depth/color/points
+                    '/SmbA_Sensor_Head_Front_RealsenseD435/depth/color/points',
+                    '/SmbA_Sensor_Head_Back_RealsenseD435/depth/color/points'
                     ]
 #'/velodyne_points','/lidar_front_points'
 #### Publishers ########
